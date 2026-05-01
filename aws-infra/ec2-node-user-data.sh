@@ -20,7 +20,7 @@ mkdir -p /home/ec2-user/app
 cd /home/ec2-user/app
 
 # IMPORTANT: Update this URL to match your actual GitHub repository URL!
-git clone https://github.com/Carmen-git-code/TravelJournal .
+git clone https://github.com/Carmen-git-code/TravelJournal
 
 # Navigate into the backend folder where server.js lives
 cd backend
