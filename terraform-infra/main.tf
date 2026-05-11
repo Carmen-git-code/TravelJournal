@@ -14,7 +14,7 @@ terraform {
 }
 
 provider "aws" {
-  region = "us-east-1" # Update this to your preferred region (e.g., us-west-2)
+  region = "us-east-1"
 }
 
 variable "db_password" {
@@ -48,7 +48,7 @@ resource "aws_internet_gateway" "igw" {
 resource "aws_subnet" "public_subnet_1" {
   vpc_id                  = aws_vpc.main_vpc.id
   cidr_block              = "10.0.1.0/24"
-  availability_zone       = "us-east-1a" # Ensure this matches your region
+  availability_zone       = "us-east-1a"
   map_public_ip_on_launch = true
 
   tags = {
@@ -59,7 +59,7 @@ resource "aws_subnet" "public_subnet_1" {
 resource "aws_subnet" "public_subnet_2" {
   vpc_id                  = aws_vpc.main_vpc.id
   cidr_block              = "10.0.2.0/24"
-  availability_zone       = "us-east-1b" # Ensure this matches your region
+  availability_zone       = "us-east-1b"
   map_public_ip_on_launch = true
 
   tags = {
@@ -99,7 +99,7 @@ resource "aws_route_table_association" "public_rt_assoc_2" {
 resource "aws_subnet" "private_db_subnet_1" {
   vpc_id            = aws_vpc.main_vpc.id
   cidr_block        = "10.0.3.0/24"
-  availability_zone = "us-east-1a" # Must match your public subnet AZs
+  availability_zone = "us-east-1a"
 
   tags = {
     Name = "Travel-Journal-Private-DB-1"
@@ -109,7 +109,7 @@ resource "aws_subnet" "private_db_subnet_1" {
 resource "aws_subnet" "private_db_subnet_2" {
   vpc_id            = aws_vpc.main_vpc.id
   cidr_block        = "10.0.4.0/24"
-  availability_zone = "us-east-1b" # Must match your public subnet AZs
+  availability_zone = "us-east-1b"
 
   tags = {
     Name = "Travel-Journal-Private-DB-2"
@@ -151,7 +151,7 @@ resource "aws_security_group" "app_sg" {
     from_port       = 8080
     to_port         = 8080
     protocol        = "tcp"
-    security_groups = [aws_security_group.alb_sg.id] # Explicitly trusting the ALB
+    security_groups = [aws_security_group.alb_sg.id]
   }
 
   egress {
@@ -173,7 +173,7 @@ resource "aws_security_group" "db_sg" {
     from_port       = 3306
     to_port         = 3306
     protocol        = "tcp"
-    security_groups = [aws_security_group.app_sg.id] # Explicitly trusting the EC2 servers
+    security_groups = [aws_security_group.app_sg.id]
   }
 
   egress {
@@ -202,19 +202,19 @@ resource "aws_db_subnet_group" "travel_journal_db_subnet_group" {
 resource "aws_db_instance" "travel_journal_db" {
   identifier             = "travel-journal-db"
   allocated_storage      = 20
-  max_allocated_storage  = 100 # Enables storage auto-scaling
+  max_allocated_storage  = 100
   engine                 = "mysql"
   engine_version         = "8.0"
-  instance_class         = "db.t3.micro" # Free Tier eligible (usually)
-  db_name                = "travel_journal_db" # The initial database created
+  instance_class         = "db.t3.micro"
+  db_name                = "travel_journal_db"
   username               = "admin" # Master username
-  password               = var.db_password # Pulls from variable instead of plain text
+  password               = var.db_password
   
   db_subnet_group_name   = aws_db_subnet_group.travel_journal_db_subnet_group.name
   vpc_security_group_ids = [aws_security_group.db_sg.id]
   
-  skip_final_snapshot    = true # Set to true for dev/portfolio. False for real production.
-  publicly_accessible    = false # ZERO TRUST: The internet cannot reach this DB.
+  skip_final_snapshot    = true
+  publicly_accessible    = false
 
   tags = {
     Name = "Travel-Journal-MySQL-DB"
