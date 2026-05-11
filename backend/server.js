@@ -13,9 +13,9 @@ app.use(express.json());
 // DATABASE CONNECTION POOL
 // =======================================================================
 const dbPool = mysql.createPool({
-    host: process.env.DB_HOST,         // Your RDS Endpoint goes here!
+    host: process.env.DB_HOST,
     user: process.env.DB_USER || 'admin',
-    password: process.env.DB_PASSWORD, // The password from Terraform
+    password: process.env.DB_PASSWORD,
     database: process.env.DB_NAME || 'travel_journal_db',
     waitForConnections: true,
     connectionLimit: 10,
