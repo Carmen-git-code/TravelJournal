@@ -17,7 +17,7 @@ const INITIAL_ENTRIES = [
     endDate: "2024-05-21",
     note: "Woke up to the sound of waves and enjoyed the best espresso with a view. The drive along the coast was breathtaking.",
     photoUrl: "https://images.unsplash.com/photo-1533090161767-e6ffed986c88?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80",
-    coords: [40.6333, 14.6029] // Latitude, Longitude for map pins
+    coords: [40.6333, 14.6029]
   },
   {
     id: 2,
@@ -80,13 +80,11 @@ export default function App() {
 
   // --- MAP CONFIGURATION EFFECT ---
   useEffect(() => {
-    // Injects Leaflet CSS dynamically to ensure map renders perfectly
     const link = document.createElement('link');
     link.rel = 'stylesheet';
     link.href = 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.css';
     document.head.appendChild(link);
 
-    // Fixes default React-Leaflet marker icon issue
     delete L.Icon.Default.prototype._getIconUrl;
     L.Icon.Default.mergeOptions({
         iconRetinaUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon-2x.png',
@@ -115,14 +113,13 @@ export default function App() {
     const formData = new FormData(e.target);
     const locationStr = formData.get('location');
     
-    // Unsplash Fallback: Picks a random photo from the array every single time
+    // Unsplash Fallback - Pick a random photo from the array every single time
     let photoUrl = formData.get('photoUrl');
     if (!photoUrl) {
       const randomIndex = Math.floor(Math.random() * FALLBACK_PHOTOS.length);
       photoUrl = FALLBACK_PHOTOS[randomIndex];
     }
 
-    // Mock geocoding: drops new entries randomly on the map if not explicitly set
     const mockLat = (Math.random() * 80 - 40).toFixed(4);
     const mockLng = (Math.random() * 180 - 90).toFixed(4);
 
@@ -252,7 +249,7 @@ export default function App() {
       {/* CENTER CONTENT */}
       <main className="flex-1 px-4 md:px-8 py-8 overflow-y-auto">
         
-        {/* Header - Stays on all views */}
+        {/* Header */}
         <header className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-8">
           <div>
             <h1 className="text-3xl font-serif text-slate-800">
