@@ -13,7 +13,7 @@ This project demonstrates proficiency in cloud networking, high availability, se
 ### 🎥 Live Demo & Architecture
 > [**[Travel Journal Demo]**](http://travel-journal-prjc.s3-website-us-east-1.amazonaws.com)
 > 
-> *Note: To optimize cloud costs, the backend compute and database tiers are periodically spun down. When the backend is offline, the React frontend gracefully falls back to a locally-hosted "Portfolio Mode" to maintain a working UI for demonstration purposes.*
+> *Note: To optimize cloud costs, the backend compute and database tiers are periodically spun down. When the backend is offline, the frontend  falls back to a locally-hosted "Portfolio Mode" to maintain a working UI for demonstration purposes.*
 
 <img width="3329" height="2969" alt="Travel Journal - 3 Tier Architecture" src="https://github.com/user-attachments/assets/8e6f8093-2bce-470a-8e87-59ba31b43771" />
 
