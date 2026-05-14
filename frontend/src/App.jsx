@@ -187,7 +187,7 @@ export default function App() {
                 type="password" 
                 value={passwordInput}
                 onChange={(e) => setPasswordInput(e.target.value)}
-                placeholder="Enter password (resume or blog)" 
+                placeholder="Enter password: " 
                 className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
               />
               {authError && <p className="text-red-500 text-sm mt-2">{authError}</p>}
