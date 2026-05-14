@@ -11,7 +11,7 @@ The Travel Journal is a full-stack, enterprise-grade application deployed entire
 This project demonstrates proficiency in cloud networking, high availability, security groups, and automated scaling.
 
 ### 🎥 Live Demo & Architecture
-> [**[Travel Journal Demo]**](http://travel-journal-prjc.s3-website-us-east-1.amazonaws.com)
+> [**Travel Journal Demo**](http://travel-journal-prjc.s3-website-us-east-1.amazonaws.com) **password: blog*
 > 
 > *Note: To optimize cloud costs, the backend compute and database tiers are periodically spun down. When the backend is offline, the frontend  falls back to a locally-hosted "Portfolio Mode" to maintain a working UI for demonstration purposes.*
 
